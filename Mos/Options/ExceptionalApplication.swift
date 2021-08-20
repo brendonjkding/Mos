@@ -77,11 +77,11 @@ extension ExceptionalApplication {
     // 功能
     func isSmooth(_ block: Bool) -> Bool {
         if block { return false }
-        if !Options.shared.scrollBasic.smooth { return false }
+//        if !Options.shared.scrollBasic.smooth { return false }
         return scrollBasic.smooth
     }
     func isReverse() -> Bool {
-        if !Options.shared.scrollBasic.reverse { return false }
+//        if !Options.shared.scrollBasic.reverse { return false }
         return scrollBasic.reverse
     }
 }

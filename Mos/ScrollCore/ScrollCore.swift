@@ -45,10 +45,10 @@ class ScrollCore {
         // 无法区分黑苹果, 因为黑苹果的触控板驱动直接模拟鼠标输入
         if scrollEvent.isTrackpad() { return Unmanaged.passUnretained(event) }
         // 切换目标窗时停止滚动
-        if ScrollUtils.shared.isTargetChanged(event) {
-            ScrollPoster.shared.pauseAuto()
-            return nil
-        }
+//        if ScrollUtils.shared.isTargetChanged(event) {
+//            ScrollPoster.shared.pauseAuto()
+//            return nil
+//        }
         // 滚动阶段
         ScrollPhase.shared.syncPhase()
         // 是否返回原始事件 (不启用平滑时)

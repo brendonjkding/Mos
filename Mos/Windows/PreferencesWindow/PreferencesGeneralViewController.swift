@@ -7,6 +7,7 @@
 //
 
 import Cocoa
+import MASShortcut
 
 class PreferencesGeneralViewController: NSViewController {
     
@@ -15,10 +16,27 @@ class PreferencesGeneralViewController: NSViewController {
     @IBOutlet weak var scrollReverseCheckBox: NSButton!
     @IBOutlet weak var launchOnLoginCheckBox: NSButton!
     @IBOutlet weak var hideStatusBarIconCheckBox: NSButton!
+    @IBOutlet weak var smoothScrollingShortcutView: MASShortcutView!
+    @IBOutlet weak var scrollReverseShortcutView: MASShortcutView!
+
+    let kPreferenceSmoothScrollingShortcut: String = "smoothScrollingShortcut"
+    let kPreferenceScrollReverseShortcut: String = "scrollReverseShortcut"
     
     override func viewDidLoad() {
         // 读取设置
         syncViewWithOptions()
+
+        smoothScrollingShortcutView.associatedUserDefaultsKey = kPreferenceSmoothScrollingShortcut
+        scrollReverseShortcutView.associatedUserDefaultsKey = kPreferenceScrollReverseShortcut
+
+        MASShortcutBinder.shared()?.bindShortcut(withDefaultsKey: kPreferenceSmoothScrollingShortcut, toAction: {
+            Options.shared.scrollBasic.smooth = !Options.shared.scrollBasic.smooth
+            self.syncViewWithOptions()
+        })
+        MASShortcutBinder.shared()?.bindShortcut(withDefaultsKey: kPreferenceScrollReverseShortcut, toAction: {
+            Options.shared.scrollBasic.reverse = !Options.shared.scrollBasic.reverse
+            self.syncViewWithOptions()
+        })
     }
     
     // 平滑
